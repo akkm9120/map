@@ -20,8 +20,10 @@ document.getElementById('button').addEventListener('click',()=>{
     let userLocation
     navigator.geolocation.getCurrentPosition((position) => {
         userLocation = [position.coords.latitude, position.coords.longitude]
+        console.log(userLocation)
          map.setView(userLocation,18);
         //  marker.marker(userLocation);
+        L.marker(userLocation).addTo(map)
          let circle = L.circle(userLocation, {
             color: 'blue',
             fillColor: '#F9BD06',
@@ -41,18 +43,19 @@ document.getElementById('button').addEventListener('click',()=>{
 //   .then(response => response.json())
 //   .then(data => console.log(data));
 
-document.getElementById('searchbtn').addEventListener('click',async ()=>{
+document.getElementById("searchbtn").addEventListener('click',async ()=>{
         let inputLocation = document.getElementById("searchin").value;
-        const apiUrl = `https://geocode.xyz/${inputLocation}&auth=179880086102264830577x31571?json=1`;
-        
+        const apiUrl = `https://api.tomtom.com/search/2/geocode/${inputLocation}.json?key=56jDLQEJXuz69NIh1n9a6aukSHECQfsh`
         let userIlocation = await axios.get(apiUrl);
-        let newlocation =[userIlocation.data.latt , userIlocation.data.longt]
-        map.setView(newlocation,18);
-        circle.circle(newlocation, {
+        // console.log(userIlocation)
+        let newlocation =[userIlocation.data.results[0].position.lat, userIlocation.data.results[0].position.lon]
+        map.setView(newlocation,14);
+        console.log(newlocation);
+        L.circle(newlocation, {
             color: 'blue',
             fillColor: '#F9BD06',
-            fillOpacity: 0.3,
-            radius: 80
+            fillOpacity: 0.5,
+            radius: 500
         }).addTo(map);
 
 });
@@ -70,6 +73,3 @@ document.addEventListener("DOMContentLoaded", async function (){
 })
 
 
-// L.marker([51.5, -0.09]).addTo(map)
-    // .bindPopup('A pretty CSS popup.<br> Easily customizable.')
-    // .openPopup();

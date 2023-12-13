@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "node-geocoder": "^4.2.0",
+    "opencage-api-client": "^1.0.3"
+  }
+}

@@ -1,7 +1,9 @@
 
-defaultLocation =[1.282302, 103.858528];
-let map = L.map('map').setView(defaultLocation , 14);
-var marker = L.marker(defaultLocation).addTo(map);
+
+
+let singapore =[1.282302, 103.858528];
+let map = L.map('map').setView(singapore , 13);
+
 
 
 async function dropMarkers(){
@@ -16,24 +18,42 @@ async function dropMarkers(){
 
 }
 
-document.getElementById('button').addEventListener('click',()=>{
-    let userLocation
+
+// Declare marker variable outside the click event listener to make it accessible
+let marker;
+let circle;
+
+function addMarker() {
     navigator.geolocation.getCurrentPosition((position) => {
-        userLocation = [position.coords.latitude, position.coords.longitude]
-        console.log(userLocation)
-         map.setView(userLocation,18);
-        //  marker.marker(userLocation);
-        L.marker(userLocation).addTo(map)
-         let circle = L.circle(userLocation, {
+        const userLocation = [position.coords.latitude, position.coords.longitude];
+        console.log(userLocation);
+        map.setView(userLocation, 18);
+        
+        marker = L.marker(userLocation).addTo(map);
+        
+        circle = L.circle(userLocation, {
             color: 'blue',
             fillColor: '#F9BD06',
             fillOpacity: 0.2,
             radius: 80
-        }).addTo(map); 
+        }).addTo(map);
+    });
+}
 
-      });
-          
-})
+function removeMarker() {
+    map.removeLayer(marker);
+    map.removeLayer(circle);
+}
+
+document.getElementById('button').addEventListener('click', () => {
+    if (!marker || !map.hasLayer(marker)) {
+        addMarker();
+    } else {
+        removeMarker();
+    }
+});
+
+
 
 
 // const htmlInput = "input_here";
@@ -73,3 +93,6 @@ document.addEventListener("DOMContentLoaded", async function (){
 })
 
 
+app.listen(8000,function(){
+    console.log("server has started")
+});

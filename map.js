@@ -10,7 +10,7 @@ async function dropMarkers(){
 
     result = await getdata();
     for(i=0;i < result.length;i++){
-        L.marker([result[i].geocodes.main.latitude,result[i].geocodes.main.longitude]).addTo(map)
+        L.marker([results[i].position.lat,results[i].position.lon]).addTo(map)
         .bindPopup('A pretty CSS popup.<br> Easily customizable.')
         .openPopup();
 
@@ -19,7 +19,7 @@ async function dropMarkers(){
 }
 
 
-// Declare marker variable outside the click event listener to make it accessible
+// Declareing marker variable outside the click event listener to make it accessible
 let marker;
 let circle;
 
@@ -93,6 +93,3 @@ document.addEventListener("DOMContentLoaded", async function (){
 })
 
 
-app.listen(8000,function(){
-    console.log("server has started")
-});

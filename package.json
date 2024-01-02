@@ -9,10 +9,7 @@
   "name": "map",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/akkm9120/map.git"
-  },
+  "repository": "git+https://github.com/akkm9120/map.git",
   "author": "Aung Kyaw  Min <mail4akkm@gmail.com>",
   "license": "MIT",
   "bugs": {

@@ -6,17 +6,16 @@ let map = L.map('map').setView(singapore , 13);
 
 
 
-async function dropMarkers(){
-
+async function dropMarkers() {
     result = await getdata();
-    for(i=0;i < result.length;i++){
-        L.marker([results[i].position.lat,results[i].position.lon]).addTo(map)
-        .bindPopup('A pretty CSS popup.<br> Easily customizable.')
+    console.log(result);
+    for (i = 0; i < result.length; i++) {
+      L.marker([result[i].position.lat, result[i].position.lon]).addTo(map)
+        .bindPopup("A pretty CSS popup.\nEasily customizable.")
         .openPopup();
-
     }
-
-}
+  }
+  
 
 
 // Declareing marker variable outside the click event listener to make it accessible
@@ -69,7 +68,7 @@ document.getElementById("searchbtn").addEventListener('click', async () => {
             map.removeLayer(circle);
         }
 
-        console.log(newlocation);
+        // console.log(newlocation);
         circle = L.circle(newlocation, {
             color: 'blue',
             fillColor: '#F9BD06',
@@ -89,37 +88,60 @@ function removeCircle() {
     }
 }
 
-let circleLine =[ 
-                [1.29870130662953,103.846115154676],
-                [1.29686168652761,103.850667371778],
-                [1.29332160761123,103.855504105526],
-                [1.29321805148932,103.860999155887],
-                [1.29976683526797,103.863637018496],
-                [1.30284062963322,103.875350335178],
-                [1.30620190483123,103.882528080809],
-                [1.30838263926699,103.888662603931],
-                [1.31811208229527,103.893060355251],
-                [1.32634537166125,103.890287031366],
-                [1.33543332222291,103.888194861152],
-                [1.34282833773757,103.879758906227],
-                [1.34970787537926,103.873574846858],
-                [1.35161217102563,103.864151938047],
-                [1.35083898769384,103.848143964474],
-                [1.34870726301822,103.839423132569],
-                [1.33767450804433,103.839529820763],
-                [1.33372888232144,103.830689550136],
-                [1.32211019298476,103.814982750343],
-                [1.31751061189576,103.807586105746],
-                [1.31183479040213,103.796191823861],
-                [1.30718346654733,103.790191535173],
-                [1.29975987859198,103.787457507831],
-                [1.2934960617448,103.784427460626],
-                [1.2825421566429,103.78181045132],
-                [1.27621352268533,103.791350313154],
-                [1.27233273159647,103.802939620419],
-                [1.27075321145857,103.809748636835],
-                [1.26547263986209,103.821443069088], ]
-   
+let circleLine = 
+[[1.29870130662953,103.846115154676],
+[1.29686168652761,103.850667371778],
+[1.29332160761123,103.855504105526],
+[1.29321805148932,103.860999155887],
+[1.29976683526797,103.863637018496],
+[1.30284062963322,103.875350335178],
+[1.30620190483123,103.882528080809],
+[1.30838263926699,103.888662603931],
+[1.31811208229527,103.893060355251],
+[1.32634537166125,103.890287031366],
+[1.33543332222291,103.888194861152],
+[1.34282833773757,103.879758906227],
+[1.34970787537926,103.873574846858],
+[1.35161217102563,103.864151938047],
+[1.35083898769384,103.848143964474],
+[1.34870726301822,103.839423132569],
+[1.33767450804433,103.839529820763],
+[1.33372888232144,103.830689550136],
+[1.32211019298476,103.814982750343],
+[1.31751061189576,103.807586105746],
+[1.31183479040213,103.796191823861],
+[1.30718346654733,103.790191535173],
+[1.29975987859198,103.787457507831],
+[1.2934960617448,103.784427460626],
+[1.2825421566429,103.78181045132],
+[1.27621352268533,103.791350313154],
+[1.27233273159647,103.802939620419],
+[1.27075321145857,103.809748636835],
+[1.26547263986209,103.821443069088], ] ;
+
+// const { MongoClient } = require("mongodb").MongoClient;
+// // Replace the uri string with your MongoDB deployment's connection string.
+// const uri =
+//   "mongodb+srv://NoName1123:NoName1123@cluster0.mnrbmx6.mongodb.net/?retryWrites=true&w=majority";
+
+// async function run() {
+//    const client = await MongoClient.connect(uri, {
+//         "useUnifiedTopology": true // it's for using the latest version of MongoDB       
+//      });
+
+//      //connection
+
+//      const db = client.db("Singapore");
+//      console.log("database connected");
+
+//      const listings = await db.collection("MRT Stations").find().limit(10).toArray();
+//      console.log(listings);
+    
+// }
+// run()
+
+
+
 let TE= [[1.44829249987065,103.785692700008],
 [1.43687512821075,103.786485134907],
 [1.42725997871124,103.793850892437],
@@ -292,5 +314,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-
-
+document.addEventListener("DOMContentLoaded",()=>{
+ dropMarkers();
+    
+})

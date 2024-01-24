@@ -8,9 +8,9 @@ async function getdata(){
 }
  
 
-document.addEventListener("DOMContentLoaded", async function (){
-        console.log(await getdata())
-})
+// document.addEventListener("DOMContentLoaded", async function (){
+//         console.log(await getdata())
+// })
 
 
 
